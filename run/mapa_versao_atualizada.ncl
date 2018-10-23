@@ -24,18 +24,18 @@ plot = new(1,graphic)
   res@tiMainFontHeightF   = 0.02   
   res@tiMainString = "South America"
   
-   txres               = True
+ txres               = True
  txres@txFontHeightF = 0.015
  gsn_text_ndc(wks,"Figure : Map of South America",0.5,0.15,txres)
  res@mpDataBaseVersion     = "MediumRes"  ; Medium resolution database
 
  plot = gsn_csm_map(wks,res)
 
-     ;************************************************
-    ; create panel
-    ;************************************************
-          resP                    = True                 ; modify the panel plot
-          resP@gsnMaximize          =  False ; True 
+;************************************************
+; create panel
+;************************************************
+      resP                    = True                 ; modify the panel plot
+      resP@gsnMaximize          =  False ; True 
 
 ;************************************************
 ; create parameters
