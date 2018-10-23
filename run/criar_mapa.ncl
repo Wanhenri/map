@@ -9,21 +9,18 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
 
 begin 
 
-  wks = gsn_open_wks("png","maponly")      ; send graphics to PNG file
-  gsn_define_colormap(wks,"amwg")
+wks = gsn_open_wks("png","maponly")      ; send graphics to PNG file
+gsn_define_colormap(wks,"amwg")
 
 plot = new(2,graphic)
 
   res                       = True  
-  ;res@gsnDraw             = False
-  ;res@gsnFrame            = False 
   res@gsnMaximize           = False ; True         ; Maximize plot in frame.
   res@mpCenterLonF= 180
   res@mpDataBaseVersion    = "HighRes"
   res@gsnPaperOrientation   = "Portrait"
   res@pmTickMarkDisplayMode = "Always"     ; Turn on map tickmarks
   res@mpDataSetName         = "Earth..4"   ; This new database contains
-  ;res@mpDataBaseVersion     = "MediumRes"  ; Medium resolution database
   res@mpOutlineOn           = True         ; Turn on map outlines
   res@mpOutlineSpecifiers   = (/"Brazil:states"/) 
   res@mpFillOn              = True         ; Turn on map fill
@@ -37,19 +34,12 @@ plot = new(2,graphic)
   res@tiMainOffsetYF = -0.02          ;reduz o espaÃ§o entre o titulo e a imagem
   res@tiMainFontHeightF   = 0.02   
   res@tiMainString = "South America"
-  ;res@gsnLeftString         = "Versao "
-
+  
 ;Draw a text string at the bottom
   txres               = True
   txres@txFontHeightF = 0.015
   gsn_text_ndc(wks,"Figure : Global Forecast System (GFS)",0.5,0.15,txres)
-      ;; ;;txres@txFont = "helvetica-bold"
-      ;; ;;txres@txBackgroundFillColor = "White"
-      ;; ;;txres@txPerimOn = True
-      ;;gsn_text_ndc(wks,"B2",0.5,0.38,txres)
-      ;drawNDCGrid(wks)
-
-
+    
 plot(0) = gsn_csm_map(wks,res)
 
       txres               = True
@@ -65,13 +55,8 @@ plot(1) = gsn_csm_map(wks,res)
 ;************************************************
       resP                    = True                 ; modify the panel plot
       resP@gsnMaximize          =  False ; True 
-      ;resP@gsnFrame            = False ; True ; False                ; don't advance panel plot
-      ;resP@gsnDraw             = False
       gsn_panel(wks,plot,(/1,1/),resP)               ; now draw as one plot
     
-    ;system("mogrify -trim maponly.000001.png")
-    ;system("mogrify -trim maponly.000002.png")
-
 ;************************************************
 ; create parameters
 ;************************************************
@@ -79,17 +64,9 @@ plot(1) = gsn_csm_map(wks,res)
 draw(plot)
   ;  drawNDCGrid(wks)
       txres               = True
-      ;txres@txFontHeightF = 0.015
       txres@txFontHeightF = 0.011
      
       gsn_text_ndc(wks,"Figure : Map of South America ",0.5,0.18,txres)
-      ;;;gsn_text_ndc(wks,"Figure : Map of South America ",0.33,0.18,txres)
-      ;;;;#Escrever texto 
-      ;;;gsn_text_ndc(wks,"FFFFFFFFFFFFFFFFFFFFFFFFFFF",0.5,0.16,txres)
-      ;;;gsn_text_ndc(wks,"FFFFFFFFFFFFFFFFFFFFFFFFFFF",0.5,0.148,txres)
-      ;;;gsn_text_ndc(wks,"FFFFFFFFFFFFFFFFFFFFFFFFFFF",0.5,0.134,txres)
-      ;;;gsn_text_ndc(wks,"FFFFFFFFFFFFFFFFFFFFFFFFFFF",0.5,0.12,txres)
-
       txres@txFont = "helvetica-bold"
       txres@txBackgroundFillColor = "White"
       txres@txPerimOn = True
@@ -169,15 +146,12 @@ draw(plot)
     ciry6 = (/ .575, .575, .575, .575,  .568 /)
     gsn_polyline_ndc(wks,cirx6,ciry6,ret)  ; retangulo legend
 
-
-
       
     ;#Retangulo
     ret = True             ; Indicate you want to set some resources.
     ret@gsLineColor       = "black"                 ; color of lines
     ret@gsLineThicknessF  = 3.8 
     ;#Retangulo B1
-    ;cirx = (/ .638, .500, .500, .638,  .638/)
     cirx = (/ .575, .465, .465, .575,  .575/)
     ciry = (/ .475, .475, .385, .385,  .475 /)
     gsn_polyline_ndc(wks,cirx,ciry,ret)  ; retangulo legend
